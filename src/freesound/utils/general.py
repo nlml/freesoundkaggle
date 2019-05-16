@@ -72,3 +72,14 @@ def load_config_from_hash(hsh, dir):
     config_path = config_path / ls[0]
     config = load_yaml(config_path)
     return config
+
+
+def subdir_from_wavname(wav, fs_data_dir=None):
+    fs_data_dir = fs_data_dir or (
+        Path(os.environ['FS_INPUTS_BASE']) / 'freesound-audio-tagging-2019/')
+    fs_data_dir = Path(fs_data_dir)
+    for subdir in ['train_curated', 'test', 'train_noisy']:
+        wavpath = fs_data_dir / subdir / wav
+        if wavpath.exists():
+            return subdir
+    assert 0, 'shouldnt be here!'
