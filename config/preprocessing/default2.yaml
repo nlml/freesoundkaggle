@@ -1,0 +1,7 @@
+path_to_im_fn_name: to_mel
+params:
+  sr: 44100
+  n_mels: 128
+  hop_length: 694
+  fmin: 20
+  n_fft_multiplier: 20

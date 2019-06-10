@@ -1,0 +1,18 @@
+seed: 0
+
+df_train_noisy:
+  strategy: KeepJustExamplesWithOneClass
+
+dataset:
+  downsample_noisy: 0.25
+  wav2im_cfg_hash: ed9fae2db0a0f56d
+
+train_batch_size: 64
+valid_batch_size: 64
+net_module: basic_conv_skip
+net_params:
+  in_channels: 4
+
+training:
+  scheduler: CosineAnnealingLR
+  optimizer: Adam

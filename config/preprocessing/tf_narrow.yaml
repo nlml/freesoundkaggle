@@ -1,0 +1,5 @@
+path_to_im_fn_name: tf
+params:
+  sr: 44100
+  fft_length: 2048
+  frame_length: 400

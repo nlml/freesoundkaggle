@@ -4,4 +4,4 @@ params:
   n_mels: 128
   hop_length: 694
   fmin: 20
-  n_fft_multiplier: 20
+  n_fft_multiplier: 40

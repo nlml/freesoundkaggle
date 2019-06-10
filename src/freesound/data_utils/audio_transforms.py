@@ -4,6 +4,7 @@ from copy import deepcopy
 import torch
 from scipy import signal
 import scipy.io.wavfile as wavfile
+from freesound.data_utils.audio_transforms_tf import path_to_im_fn_tf
 
 
 def fixdiv(v):
@@ -141,7 +142,9 @@ def path_to_im_fn_mel_and_splice_multi(wavpath, config):
 
 path_to_im_fns = {
     'to_mel': path_to_im_fn_mel,
+    'tf': path_to_im_fn_tf,
     'to_mel_compress': path_to_im_fn_mel_compress,
     'to_mel_and_splice': path_to_im_fn_mel_and_splice,
-    'to_mel_and_splice_multi': path_to_im_fn_mel_and_splice_multi
+    'to_mel_and_splice_multi': path_to_im_fn_mel_and_splice_multi,
+    'JUST_MELS': lambda x: x
 }

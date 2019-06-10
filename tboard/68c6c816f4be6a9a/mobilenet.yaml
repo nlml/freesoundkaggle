@@ -1,0 +1,18 @@
+seed: 0
+
+df_train_noisy:
+  strategy: KeepJustExamplesWithOneClass
+
+dataset:
+  downsample_noisy: 0.25
+  wav2im_cfg_hash: 0f18766724e5f2d7
+  kaggle_valid_set: True
+
+train_batch_size: 64
+valid_batch_size: 128
+net_module: mobilenet
+net_params:
+  in_channels: 6
+
+training:
+  optimizer: Adam

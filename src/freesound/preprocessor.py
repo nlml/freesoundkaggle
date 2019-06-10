@@ -14,12 +14,16 @@ CACHE_STORE_DIR = Path(os.environ['FS_DATA_STORE_DIR']) / 'preprocessed_data'
 
 
 class Preprocessor:
-    def __init__(self, config_path=None):
-        self.config_path = config_path or DEFAULT_CONFIG_PATH
-        self.config = load_yaml(self.config_path)
+    def __init__(self, config_path=None, dont_load=False, config=None):
+        if config is None:
+            self.config_path = config_path or DEFAULT_CONFIG_PATH
+            self.config = load_yaml(self.config_path)
+        else:
+            self.config = config
         self.config_hash = hash_dict(self.config)
         self.fs_data_dir = Path(KAGGLE_INPUTS_DIR) / 'freesound-audio-tagging-2019/'
         self.path_to_im_fn = path_to_im_fns[self.config['path_to_im_fn_name']]
+        self.dont_load = dont_load
         self.load_cache()
 
     def load_cache(self):
@@ -31,10 +35,13 @@ class Preprocessor:
             with bz2.BZ2File(self.cache_pkl_path, 'w') as f:
                 pickle.dump({}, f)
                 save_yaml(self.config, self.cache_path / 'config.yaml')
-        with bz2.BZ2File(self.cache_pkl_path, 'r') as f:
-            now = time.time()
-            self.cache = pickle.load(f)
-            print('Loading took {} seconds'.format(time.time() - now))
+        if self.dont_load:
+            self.cache = {}
+        else:
+            with bz2.BZ2File(self.cache_pkl_path, 'r') as f:
+                now = time.time()
+                self.cache = pickle.load(f)
+                print('Loading took {} seconds'.format(time.time() - now))
 
     def save_cache(self):
         with bz2.BZ2File(self.cache_pkl_path, 'w') as f:

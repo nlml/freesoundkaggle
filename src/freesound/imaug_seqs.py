@@ -6,12 +6,11 @@ def default():
 
     seq = iaa.Sequential([
         st(iaa.Superpixels(p_replace=0.2, n_segments=(64, 256))),
-        st(iaa.CropAndPad(percent=(-0.25, 0.25))),
+        st(iaa.CropAndPad(px=((-5, 5), (-20, 20), (-5, 5), (-20, 20)))),
         st(iaa.GaussianBlur(sigma=(0.0, 1.5))),
-        st(iaa.Grayscale(alpha=(0.1, 0.3))),
-        st(iaa.PiecewiseAffine(scale=(0.01, 0.05))),
+        st(iaa.PiecewiseAffine(scale=(0.005, 0.02))),
         st(iaa.Add((-40, 40))),
-        st(iaa.AdditiveGaussianNoise(loc=0., scale=(0.1, 10)), 0.4)
+        st(iaa.AdditiveGaussianNoise(loc=0., scale=(0.1, 10)))
     ])
     return seq
 

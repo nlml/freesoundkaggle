@@ -1,3 +1,6 @@
+create_kaggle_dataset.sh
+datasets
+datasets/*
 *.pt
 ckpts/*
 
